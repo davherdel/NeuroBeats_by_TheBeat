@@ -1,3 +1,5 @@
-.ipynb_checkpoints/
-__pycache__/
+Backups/
+Media/
 .env
+__pycache__/
+.ipynb_checkpoints/
