@@ -66,6 +66,8 @@ The objective was not only to predict performance, but to understand the underly
 
 The dataset was constructed through direct integration with the YouTube Data API and enriched through custom feature engineering.
 
+**Final dataset: 925 videos · 28 features · 2019–2026**, sampled across lofi, chillhop, and study-oriented keywords.
+
 Collected information included:
 
 * Channel-level performance metrics
@@ -76,7 +78,13 @@ Collected information included:
 * Channel authority metrics
 * Audience behavior signals
 
-Additional derived variables were engineered to improve predictive performance and uncover hidden relationships within the niche.
+Additional derived variables were engineered to improve predictive performance and uncover hidden relationships within the niche:
+
+* **log_engagement** — log-stabilized target variable (likes + comments)
+* **is_pomodoro / is_live** — niche-specific title triggers
+* **has_visuals** — high-quality/4K aesthetic markers
+* **is_long_form** — strategic duration flag (> 20 min)
+* **log_subscribers** — channel authority signal
 
 ---
 
@@ -100,7 +108,7 @@ Investigated relationships between:
 * Audience interaction patterns
 * Niche-level performance trends
 
-The analysis revealed several cases where smaller channels consistently outperformed larger competitors on engagement efficiency.
+The analysis revealed several cases where smaller channels consistently outperformed larger competitors on engagement efficiency — the **"Underdog" effect**.
 
 ### Section 3 — Machine Learning Pipeline
 
@@ -109,16 +117,23 @@ Multiple predictive models were developed and evaluated:
 * Random Forest V1
 * Random Forest V2
 * Random Forest V2.1
-* XGBoost
+* Stacking & MLP ensemble experiments
+* XGBoost (winning model)
 
 Validation techniques included:
 
-* GroupShuffleSplit
-* GroupKFold
+* GroupShuffleSplit by channel
+* GroupKFold by keyword
 * Leakage detection and mitigation
 * Residual analysis
 
-A major focus of the project was identifying and eliminating sources of data leakage that initially produced overly optimistic results.
+A major focus of the project was identifying and eliminating sources of data leakage that initially produced overly optimistic results:
+
+| Stage | Validation | Mean R² |
+| --- | --- | --- |
+| Initial random split | Train/test split | 0.49 *(inflated by leakage)* |
+| Leakage control | GroupShuffleSplit by channel | 0.17 *(realistic baseline)* |
+| Final model | XGBoost + channel authority + GroupKFold | **0.37** *(honest and generalizable)* |
 
 The final models prioritized realistic performance and generalization over inflated metrics.
 
@@ -152,11 +167,13 @@ This phase transformed NeuroBeats from a predictive analytics project into an ex
 ## 💡 Key Findings
 
 * Audience engagement is driven by a combination of content, authority, and behavioral signals rather than a single dominant metric.
+* **Channel authority sets the floor, not the ceiling:** subscriber count is the strongest predictor of baseline engagement, but it does not guarantee a hit.
+* **Niche specialization beats general content:** "Pomodoro" and "Live" title triggers significantly lift engagement — even for smaller channels.
 * Larger channels do not automatically achieve higher engagement rates.
-* Proper validation significantly reduced overly optimistic performance estimates, highlighting the importance of leakage detection.
+* Proper validation cut the initial R² from an inflated 0.49 to a realistic baseline, highlighting the importance of leakage detection — before climbing back to an honest 0.37 with better features.
 * Explainability analysis revealed that only a subset of features consistently influenced model predictions.
 * Several smaller channels demonstrated engagement efficiency far beyond what their size would suggest.
-* Audience behavior patterns can provide valuable guidance for content design and experimentation.
+* The *Study With Me* niche shows strong recency bias — newer videos (2023+) outperform legacy content in active interaction.
 
 ---
 
@@ -178,7 +195,8 @@ This phase transformed NeuroBeats from a predictive analytics project into an ex
 | Deliverable                 | Description                               |
 | --------------------------- | ----------------------------------------- |
 | **Jupyter Notebook**        | Complete end-to-end analysis workflow     |
-| **Machine Learning Models** | Random Forest and XGBoost implementations |
+| **Machine Learning Models** | `ultimate_xgb_model.pkl` and `best_rf_model.pkl` |
+| **Final Dataset**           | `youtube_niche_data_final.csv` — Tableau-ready, with predictions and residuals |
 | **SHAP Analysis**           | Explainable AI outputs                    |
 | **Visualizations**          | Exploratory and presentation-ready charts |
 | **Audio Experiments**       | Data-informed binaural beat prototypes    |
