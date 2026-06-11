@@ -1,154 +1,205 @@
-# NeuroBeats – Applied Machine Learning for YouTube Niche Engagement
+# 🎵 NeuroBeats by TheBeat
 
-## Project Overview
+### YouTube Niche Analytics & Engagement Prediction
+
+### `Python` · `Machine Learning` · `XGBoost` · `Random Forest` · `SHAP` · `YouTube Data API v3` · `Data Analytics`
+
+> **End-to-end machine learning and analytics project** combining YouTube API data, audience behavior analysis, predictive modeling, explainable AI, and experimental audio generation to understand engagement dynamics within focus-oriented music communities.
+
+---
+
+## 👤 About This Project
+
+**David Hernandez | Data Analyst**
+📍 Lisbon, Portugal · 2025–2026
 
 NeuroBeats is an end-to-end applied Machine Learning project focused on modeling engagement dynamics within highly specific YouTube niches:
 
-- Lofi
-- Chillhop
-- Study-oriented content
+* 🎧 Lofi
+* 🌙 Chillhop
+* 📚 Study-oriented content
 
-The objective was not only to build a predictive model, but to:
+Using YouTube Data API data, feature engineering, predictive modeling, and explainable AI techniques, the project investigates the factors that influence audience engagement and content performance.
 
-- Engineer domain-specific features
-- Detect and correct data leakage
-- Design robust validation strategies
-- Prioritize generalization over inflated metrics
-- Interpret model behavior using feature importance tools
+Beyond analytics, NeuroBeats explores the intersection of listener behavior, focus-oriented audio, and binaural beat frequencies — transforming data-driven insights into experimental audio products designed around concentration, relaxation, and productivity.
 
-This project emphasizes ML rigor over surface-level analytics.
+The result is a hybrid project combining analytics, machine learning, audience research, and experimental audio development into a single end-to-end workflow.
 
 ---
 
-## Business Framing
+## 🎯 Business Problem
 
-Can we predict expected audience engagement using structured metadata, niche-specific triggers, temporal patterns, and channel authority signals?
+The lofi and study music ecosystem has grown into one of YouTube's most competitive content categories, attracting millions of listeners seeking focus, relaxation, and productivity support.
 
-Rather than modeling views, the project targets:
+Yet creators often rely on intuition when deciding:
 
-**Engagement = Likes + Comments**
+* Which content formats to publish
+* How audience behavior changes over time
+* Which channels consistently outperform expectations
+* What factors drive engagement within highly specialized music communities
 
-Engagement was chosen because it reflects active audience commitment — especially relevant in niche communities.
+This project explores a central question:
 
-Target transformation:
-`log1p(likes + comments)`  
-to normalize skewed distributions and reduce viral outlier distortion.
+> **Can audience engagement in focus-oriented music niches be modeled, explained, and leveraged to create better content experiences?**
 
----
-
-## Feature Engineering (Core Contribution)
-
-Significant effort was invested in domain-driven feature creation.
-
-### Content & Niche Strategy (Engineered)
-- `is_pomodoro`
-- `is_live`
-- `is_long_form` (>20 minutes)
-- `has_visuals`
-- `video_duration_seconds`
-- `title_length`
-
-These features capture behavioral triggers specific to the Lofi/Study ecosystem.
-
-### Temporal Modeling
-- `year`
-- `year_label`
-
-Captures post-2020 niche acceleration and structural shifts.
-
-### Channel Authority Metrics
-- `log_subscribers`
-- `log_channel_views`
-- `channel_video_count`
-
-Log transformations were applied to stabilize variance and reduce heteroscedasticity.
+The objective was not only to predict performance, but to understand the underlying signals driving audience behavior.
 
 ---
 
-## Model Development & Validation
+## 🛠️ Tech Stack
 
-### Baseline Phase
-- Linear Regression
-- Random Forest
-
-Initial Random Split produced R² ≈ 0.49  
-→ Identified as leakage-prone and overly optimistic.
-
-### Leakage Detection & Correction
-
-Evaluation transitioned to:
-
-- GroupShuffleSplit (by channel)
-- GroupKFold (by keyword)
-
-This forced cross-niche generalization and removed hidden signal leakage.
-
-### Final Model Comparison
-
-| Model | Validation Strategy | R² | Notes |
-|-------|--------------------|-----|------|
-| RF | Random Split | 0.49 | Leakage likely |
-| RF | GroupKFold | 0.18 | Realistic baseline |
-| XGBoost | GroupKFold | 0.20–0.37 | Strongest generalizable model |
-
-Peak fold performance reached R² = 0.83 in niche-specific segments.
+| Tool                    | Usage                                     |
+| ----------------------- | ----------------------------------------- |
+| **Python 3**            | Core analysis and modeling                |
+| **Pandas**              | Data cleaning and feature engineering     |
+| **YouTube Data API v3** | Data acquisition                          |
+| **Scikit-learn**        | Validation and modeling workflows         |
+| **Random Forest**       | Baseline predictive modeling              |
+| **XGBoost**             | Advanced predictive modeling              |
+| **SHAP**                | Explainable AI and feature interpretation |
+| **Matplotlib**          | Exploratory analysis and visualization    |
+| **Tableau**             | Interactive dashboards and reporting      |
 
 ---
 
-## Feature Importance & Model Interpretation
+## 📊 Dataset
 
-Interpretability was prioritized over raw performance.
+The dataset was constructed through direct integration with the YouTube Data API and enriched through custom feature engineering.
 
-- SHAP Global Explainer used for impact analysis
-- Feature importance showed:
+Collected information included:
 
-  - Long-form duration strongly influences engagement
-  - Channel authority stabilizes predictions
-  - Keyword stacking has limited predictive impact
-  - Format-driven triggers add measurable signal
+* Channel-level performance metrics
+* Subscriber counts
+* View counts
+* Video engagement indicators
+* Upload frequency patterns
+* Channel authority metrics
+* Audience behavior signals
 
-The project demonstrates how domain-aligned feature engineering can outperform superficial metadata optimization.
-
----
-
-## Technical Stack
-
-- Python
-- Pandas
-- Scikit-learn
-- XGBoost
-- SHAP
-- YouTube Data API
-- Cross-validation (GroupKFold)
-- REAPER (applied production layer)
+Additional derived variables were engineered to improve predictive performance and uncover hidden relationships within the niche.
 
 ---
 
-## Engineering Highlights
+## 🔍 What Was Built
 
-- End-to-end ML pipeline ownership
-- Advanced feature engineering
-- Leakage detection & mitigation
-- Group-aware cross-validation
-- Model stability analysis
-- SHAP-based interpretability
-- Translation of ML insights into real production decisions
+### Section 1 — Data Collection & Feature Engineering
+
+* Extracted channel and video-level information through the YouTube Data API
+* Cleaned and standardized engagement metrics
+* Engineered authority and performance indicators
+* Created modeling-ready datasets
+* Built reusable data pipelines for future experimentation
+
+### Section 2 — Exploratory Data Analysis
+
+Investigated relationships between:
+
+* Subscriber counts and engagement
+* Channel size and performance
+* Upload behavior and growth
+* Audience interaction patterns
+* Niche-level performance trends
+
+The analysis revealed several cases where smaller channels consistently outperformed larger competitors on engagement efficiency.
+
+### Section 3 — Machine Learning Pipeline
+
+Multiple predictive models were developed and evaluated:
+
+* Random Forest V1
+* Random Forest V2
+* Random Forest V2.1
+* XGBoost
+
+Validation techniques included:
+
+* GroupShuffleSplit
+* GroupKFold
+* Leakage detection and mitigation
+* Residual analysis
+
+A major focus of the project was identifying and eliminating sources of data leakage that initially produced overly optimistic results.
+
+The final models prioritized realistic performance and generalization over inflated metrics.
+
+### Section 4 — Explainable AI
+
+SHAP analysis was implemented to:
+
+* Interpret model decisions
+* Identify the strongest engagement drivers
+* Validate model behavior
+* Generate actionable insights for creators
+
+This stage transformed the project from a predictive exercise into a decision-support framework.
+
+### Section 5 — Neuro Audio Experiments
+
+Insights from the analytics workflow were extended into a practical experimentation phase focused on binaural beat generation.
+
+Custom audio tracks were developed using combinations of carrier frequencies and target brainwave ranges commonly associated with:
+
+* 🧠 Beta (focus and concentration)
+* 🌊 Alpha (relaxation and calmness)
+* 🌌 Theta (deep relaxation and creativity)
+
+While the project does not attempt to validate neurological effects, it explores how audience preferences and listening behavior can inform the design of focus-oriented audio experiences.
+
+This phase transformed NeuroBeats from a predictive analytics project into an experimental data-driven product concept.
 
 ---
 
-## What This Project Demonstrates
+## 💡 Key Findings
 
-- Applied ML thinking
-- Model robustness prioritization
-- Evaluation discipline
-- Feature design in low-signal environments
-- Practical ML implementation beyond notebook-level experimentation
+* Audience engagement is driven by a combination of content, authority, and behavioral signals rather than a single dominant metric.
+* Larger channels do not automatically achieve higher engagement rates.
+* Proper validation significantly reduced overly optimistic performance estimates, highlighting the importance of leakage detection.
+* Explainability analysis revealed that only a subset of features consistently influenced model predictions.
+* Several smaller channels demonstrated engagement efficiency far beyond what their size would suggest.
+* Audience behavior patterns can provide valuable guidance for content design and experimentation.
 
 ---
 
-## Author
-David Hernandez
-💻📊Applied ML & Data Analyst  
-📍 Based in Portugal  
-💼 Open to ML Engineer & Data-focused roles  
-📫 LinkedIn: https://www.linkedin.com/in/david-hernandez-cr-pt/
+## 📁 Repository Structure
+
+```text
+├── NeuroBeats_by_TheBeat.ipynb          # Main analysis notebook
+├── data/                                # Raw and processed datasets
+├── models/                              # Trained machine learning models
+├── visualizations/                      # Charts and figures
+├── audio_experiments/                   # Binaural beat prototypes
+└── README.md                            # Project documentation
+```
+
+---
+
+## 📈 Project Deliverables
+
+| Deliverable                 | Description                               |
+| --------------------------- | ----------------------------------------- |
+| **Jupyter Notebook**        | Complete end-to-end analysis workflow     |
+| **Machine Learning Models** | Random Forest and XGBoost implementations |
+| **SHAP Analysis**           | Explainable AI outputs                    |
+| **Visualizations**          | Exploratory and presentation-ready charts |
+| **Audio Experiments**       | Data-informed binaural beat prototypes    |
+| **Dashboard Assets**        | Reporting and storytelling layer          |
+
+---
+
+## 🚀 Project Highlights
+
+* Built a custom analytical dataset through API integration
+* Applied advanced validation techniques to eliminate model leakage
+* Implemented explainable AI using SHAP
+* Combined analytics, machine learning, audience behavior research, and audio experimentation
+* Extended analytical findings into a practical product development concept
+
+---
+
+## About Me
+
+Data Analyst transitioning from 10+ years in IT management and operations, bringing a strong foundation in systems thinking, stakeholder communication, and problem-solving.
+
+I build end-to-end analytical solutions — from data collection and feature engineering to machine learning models, dashboards, and data storytelling — with a focus on transforming data into actionable insights and business value.
+
+📬 [LinkedIn](https://www.linkedin.com/in/david-hernandez-cr-pt/) · [GitHub](https://github.com/davherdel) · [Tableau Public](https://public.tableau.com/app/profile/david.hernandez6239) · [NeuroBeats by TheBeat - Canva](https://canva.link/c789uul6xotkwh0)
