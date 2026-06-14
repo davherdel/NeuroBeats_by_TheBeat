@@ -14,10 +14,6 @@
 
 ## 👤 About This Project
 
----
-
-## 👤 About This Project
-
 **David Hernandez | Data Analyst**
 📍 Lisbon, Portugal · 2025–2026
 
