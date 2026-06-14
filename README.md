@@ -6,7 +6,7 @@
 
 > **End-to-end machine learning and analytics project** combining YouTube API data, audience behavior analysis, predictive modeling, explainable AI, and experimental audio generation to understand engagement dynamics within focus-oriented music communities.
 
-🎵 **[View the full project → NeuroBeats by TheBeat](https://canva.link/c789uul6xotkwh0)**
+🎵 **[View the project presentation on Canva → NeuroBeats by TheBeat](https://canva.link/c789uul6xotkwh0)**
 
 [![NeuroBeats by TheBeat](neurobeats_by_thebeat_index.png)](https://canva.link/c789uul6xotkwh0)
 
