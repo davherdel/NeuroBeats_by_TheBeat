@@ -22,6 +22,7 @@ NeuroBeats is an end-to-end applied Machine Learning project focused on modeling
 * 🎧 Lofi
 * 🌙 Chillhop
 * 📚 Study-oriented content
+* 🧠 Binaural beats for concentration
 
 Using YouTube Data API data, feature engineering, predictive modeling, and explainable AI techniques, the project investigates the factors that influence audience engagement and content performance.
 
