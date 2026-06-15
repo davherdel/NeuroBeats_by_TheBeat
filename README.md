@@ -2,7 +2,7 @@
 
 ### YouTube Niche Analytics & Engagement Prediction
 
-### `Python` · `Machine Learning` · `XGBoost` · `Random Forest` · `SHAP` · `YouTube Data API v3` · `Data Analytics`
+### `Python` · `Machine Learning` · `XGBoost` · `Random Forest` · `SHAP` · `YouTube Data API v3` · `Marketing Analytics & Engagement Modeling`
 
 > **End-to-end machine learning and analytics project** combining YouTube API data, audience behavior analysis, predictive modeling, explainable AI, and experimental audio generation to understand engagement dynamics within focus-oriented music communities.
 
